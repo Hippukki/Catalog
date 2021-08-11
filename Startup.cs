@@ -42,7 +42,10 @@ namespace Catalog
                 return new MongoClient(settings.connectionString);
             });
             services.AddSingleton<IItemsRepository, MongoDBItemsRepository>();
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.SuppressAsyncSuffixInActionNames = false;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog", Version = "v1" });
